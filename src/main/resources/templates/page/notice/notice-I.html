@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/layout.html}">
+    <head>
+        <meta charset="UTF-8">
+        <title>공지사항 작성</title>
+        <link rel="stylesheet" href="/notice/css/notice.css"/>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <form id="noticeFrm">
+                <div class="mb-3">
+                    <label for="title" class="form-label">제목</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">내용</label>
+                    <textarea class="form-control notice" id="content" name="content" rows="3"></textarea>
+                </div>
+            </form>
+            <div class="col-lg-12 col-sm-12 text-lg-end text-center">
+                <button type="button" class="btn btn-primary insert">작성하기</button>
+                <button type="button" class="btn btn-warning cancel">취소하기</button>
+            </div>
+            <script src="/notice/js/noticeJs.js"></script>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+#???? ??
+spring:
+  profiles:
+    active: dev #???  yml? ??? ????? ????
+
+#dev
+---
+spring:
+  #db ??
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: BLUE
+    password: 1234
+  #????
+  security:
+    user: #?? ?? ?? ? ?? ?? ??
+      name: dev
+      password: 1234
+  config:
+    activate:
+      on-profile: dev
+  thymeleaf:
+    suffix: .html
+    cache: false
+    prefix: classpath:templates/
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        
+#?? ??? ???? ??
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
+#??
+server:
+  port: 80 #????
+  servlet:
+    context-path: / #?????? ???
+    encoding:
+      charset: UTF-8 #http ??? ?? ?? ??
+      enabled: true #http ??? ?? ?? ??
+      force: true #http ??? ?? ?? ??
+
+
+---

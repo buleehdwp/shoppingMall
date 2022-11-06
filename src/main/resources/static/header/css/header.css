@@ -1,0 +1,14 @@
+a.navbar-brand img {
+    width: 70%;
+}
+
+@media (min-width: 992px) {
+    .home_logo ul {
+        position: relative;
+        right: 4%
+    }
+
+    .home_logo ul li {
+        padding-left: 5rem;
+    }
+}
