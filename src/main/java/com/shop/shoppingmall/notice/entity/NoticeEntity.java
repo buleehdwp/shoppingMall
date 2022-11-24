@@ -5,10 +5,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.time.format.DateTimeFormatter;
 
 @Entity
-@Table(name = "BOARD")
+@Table(name = "G_BOARD")
 @Data
 public class NoticeEntity {
 
@@ -24,14 +24,17 @@ public class NoticeEntity {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "DEL_YN")
+    @Column(name = "create_by")
+    private String createBy;
+
+    @Column(name = "del_yn")
     private String delYn;
 
-    @Column(name = "created_date")
-    private LocalDateTime createDate = LocalDateTime.now();
+    @Column(name = "created_date", updatable = false)
+    private String createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-    @Column(name = "update_date")
-    private LocalDateTime updateDate;
+    @Column(name = "update_date", updatable = true)
+    private String updateDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
 
 }

@@ -1,42 +1,37 @@
 package com.shop.shoppingmall.notice.controller;
 
 import com.shop.shoppingmall.common.Web.ApiResponseMessage;
-import com.shop.shoppingmall.notice.dto.NoticeDto;
 import com.shop.shoppingmall.notice.entity.NoticeEntity;
 import com.shop.shoppingmall.notice.service.NoticeService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.net.URI;
 
 @RestController
-@RequestMapping("/notice")
+@RequestMapping("/api")
+@AllArgsConstructor
 public class NoticeController {
 
-    @Autowired
     private NoticeService noticeService;
 
-    @GetMapping("/view")
-    public ModelAndView getNotice() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("page/notice/notice-V");
-        mav.addObject("list", noticeService.findAll());
-        return mav;
+    @GetMapping("/view/notice/search")
+    public ResponseEntity<ApiResponseMessage> getSearch(@RequestParam(value = "keyword", required = false) String keyword, @PageableDefault(size = 10, sort = "updateDate", direction = Sort.Direction.DESC) Pageable pageable) {
+        return noticeService.findAll(keyword, pageable);
+    }
+
+    @PostMapping("/view/notice/detail")
+    public ResponseEntity<ApiResponseMessage> getDetail(@RequestBody NoticeEntity noticeEntity) throws Exception {
+        return noticeService.findTitle(noticeEntity.getTitle());
     }
 
     /* =============================== Admin =============================== */
-    @GetMapping("/admin/insertView")
-    public ModelAndView getNoticeInsertView() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("page/notice/notice-I");
-        return mav;
-    }
-
-    @PostMapping("/admin/insert")
-    public ResponseEntity<ApiResponseMessage> noticeInsert(@RequestBody NoticeEntity noticeEntity) {
-        return noticeService.noticeInsert(noticeEntity);
+    @PostMapping("/admin/submit")
+    public ResponseEntity<ApiResponseMessage> noticeInsert(@RequestParam String type, @RequestBody NoticeEntity noticeEntity) {
+        return noticeService.noticeInsert(type, noticeEntity);
     }
 }

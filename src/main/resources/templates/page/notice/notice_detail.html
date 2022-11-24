@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/layout.html}">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/notice/notice.css"/>
+        <script src="/notice/notice_detail.js"></script>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div sec:authorize="hasAnyRole('USER','ANONYMOUS')" id="detailDiv">
+                <table class="table detailTable">
+
+                </table>
+                <div class="col-lg-12 col-sm-12 text-lg-end text-center">
+                    <button type="button" class="btn btn-info backList">목록</button>
+                </div>
+            </div>
+
+            <div sec:authorize="hasRole('ADMIN')" id="modifyDiv">
+
+                <table class="table modifyTable" id="modifyTable">
+                    <input type="hidden" name="uuid">
+                    <input type="hidden" name="delYn">
+                </table>
+                <div class="col-lg-12 col-sm-12 text-lg-end text-center">
+                    <button type="button" class="btn btn-primary modify">수정하기</button>
+                    <button type="button" class="btn btn-danger delete">삭제하기</button>
+                    <button type="button" class="btn btn-warning cancel">뒤로가기</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

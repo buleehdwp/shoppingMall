@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" layout:decorate="~{/layouts/layout.html}" xmlns:layout="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>접근권한 없음</title>
+        <script>
+            $(function () {
+                alert("접근권한이 없습니다.")
+                location.href = "/"
+            })
+        </script>
+
+    </head>
+    <body>
+        <div layout:fragment="content">
+        </div>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/layout.html}">
+    <head>
+        <meta charset="UTF-8">
+        <title>로그인</title>
+        <link rel="stylesheet" href="/user/user.css"/>
+        <script src="/user/user.js"></script>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <form action="/api/login" method="POST" class="login">
+                <img class="mb-4 loginLogo" src="/user/login-logo.png" alt="로그인/회원가입 이미지">
+                <div class="form-floating">
+                    <input type="text" class="form-control input" name="email" id="email" autocomplete="off">
+                    <label for="email">이메일</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control input" name="password" id="password">
+                    <label for="password">비밀번호</label>
+                </div>
+                <button type="submit" class="w-100 btn btn-lg btn-primary firstBtn loginBtn">로그인</button>
+                <button type="button" class="w-100 btn btn-lg btn-dark secondBtn signUpBtn">회원가입하기</button>
+            </form>
+        </div>
+    </body>
+</html>

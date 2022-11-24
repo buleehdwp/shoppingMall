@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/reservation")
+@RequestMapping("/api")
 public class reservationController {
 
-    @GetMapping("/view")
+    @GetMapping("/user/reservation/list")
     public ModelAndView getReservation() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("page/reservation/reservation-V");
+        mav.setViewName("page/reservation/reservation_view");
         return mav;
     }
 }

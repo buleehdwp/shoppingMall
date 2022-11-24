@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/layout.html}">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/notice/notice.css"/>
+        <script src="/notice/notice_view.js"></script>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="input-group">
+                <input type="search" id="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"/>
+                <button type="button" class="btn btn-outline-primary search">검색하기</button>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">제목</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">작성일</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <!--            <nav aria-label="Page navigation example">-->
+            <!--                <ul class="pagination">-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="-">Previous</p></li>-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="0">1</p></li>-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="1">2</p></li>-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="2">3</p></li>-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="3">4</p></li>-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="4">5</p></li>-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="5">6</p></li>-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="6">7</p></li>-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="7">8</p></li>-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="8">9</p></li>-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="9">10</p></li>-->
+            <!--                    <li class="page-item"><p class="page-link" data-pageNum="+">Next</p></li>-->
+            <!--                </ul>-->
+            <!--            </nav>-->
+            <br>
+<!--            <a sec:authorize="hasRole('ADMIN')" class="active" href="/api/user/admin/noticeModify">글등록(관리자만보이게 코딩)</a>-->
+            <a class="active" href="/api/user/admin/insert">글등록(TODO 관리자 페이지로 이동)</a>
+        </div>
+    </body>
+</html>

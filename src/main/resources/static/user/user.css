@@ -1,0 +1,22 @@
+.form-control.input{
+    margin-bottom: 3px;
+}
+
+.login, .signUp{
+    width: 30%;
+    margin: 7% auto;
+}
+
+.loginLogo {
+    margin: 0 auto;
+    display: block;
+    width: 40%;
+}
+
+.loginTitle{
+    text-align: center;
+}
+
+.firstBtn {
+    margin: 10% 0 2% 0;
+}

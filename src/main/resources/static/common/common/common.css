@@ -2,10 +2,29 @@ body {
     padding-bottom: 20px;
 }
 
+/*컨테이너 크기*/
 .container-content{
     height: 625px;;
 }
 
+/*메뉴*/
 .navbar {
     margin-bottom: 20px;
 }
+
+/*메뉴*/
+p.page-link{
+    cursor: pointer;
+}
+
+/*검색영역*/
+.input-group{
+    width: 25%;
+    float: right;
+    margin-bottom: 3%
+}
+
+.footerss{
+    margin-top: 300px;
+}
+
