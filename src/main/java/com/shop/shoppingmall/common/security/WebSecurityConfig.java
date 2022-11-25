@@ -27,32 +27,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-         /**
-          * 주소의 1번째 자리는 api 로 통일
-          * 주소의 2번째 자리는 user, view, 두가지로 분류
-          * (기본) api/user/* --> 기본적으로 로그인이 필요함(내 예약조회 등)
-          * (기본) api/view/* --> 자유롭게 이용 가능(공지사항, 예약하기 등)
-          * (중요) api/user/admin/* --> 로그인한 아이디의 auth가 ROLE_ADMIN이어야 함(db에서 따로 설정)(관리자 등)
-          * */
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/view/*/*", "/api/user/submit/*").permitAll()
-                .antMatchers("/api/user/admin/*").hasRole("ADMIN")
-                .antMatchers("/api/user/*/*").authenticated()
+                .antMatchers("/api/view/*", "/api/view/*/*", "/api/send/*", "/api/send/*/*").permitAll()
+                .antMatchers("/api/admin/*", "/api/admin/*/*").hasRole("ADMIN")
+                .antMatchers("/api/user/*", "/api/user/*/*").authenticated()
                 .anyRequest().permitAll() //나머지 요청은 모두 허용
                 .and()
-                    .formLogin() //로그인 설정
-                    .loginPage("/api/login")        //로그인 페이지
-                    .usernameParameter("email")     // 아이디 파라미터명 설정
-                    .passwordParameter("password")  // 패스워드 파라미터명 설정
-                    .successHandler(new loginSuccess()) // 성공 시 수행될 로직
-                    .failureHandler(new loginFailure()) //실패 시 수행될 로직
+                .formLogin() //로그인 설정
+                .loginPage("/api/view/user/login")        //로그인 페이지
+                .usernameParameter("email")     // 아이디 파라미터명 설정
+                .passwordParameter("password")  // 패스워드 파라미터명 설정
+                .successHandler(new loginSuccess()) // 성공 시 수행될 로직
+                .failureHandler(new loginFailure()) //실패 시 수행될 로직
                 .and()
-                    .logout() // 로그아웃 설정
-                    .logoutSuccessUrl("/") // 로그아웃 시 이동할 페이지
-                    .invalidateHttpSession(true) // 로그아웃시 세션소멸
+                .logout() // 로그아웃 설정
+                .logoutSuccessUrl("/") // 로그아웃 시 이동할 페이지
+                .invalidateHttpSession(true) // 로그아웃시 세션소멸
                 .and()
-                    .exceptionHandling().accessDeniedPage("/access-denied");
+                .exceptionHandling().accessDeniedPage("/api/view/access-denied");
     }
 
     @Override
@@ -74,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
             System.out.println("exception : " + exception.getMessage());
-            response.sendRedirect("/api/login?fail"); // 인증이 실패하면 로그인 화면 유지
+            response.sendRedirect("/api/view/user/login?fail"); // 인증이 실패하면 로그인 화면 유지
         }
     }
 }

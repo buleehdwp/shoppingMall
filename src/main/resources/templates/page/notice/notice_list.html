@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="/notice/notice.css"/>
         <script src="/notice/notice_view.js"></script>
+        <script>
+            console.log('<sec:authorize="principal">')
+        </script>
     </head>
     <body>
         <div layout:fragment="content">
@@ -39,8 +42,9 @@
             <!--                </ul>-->
             <!--            </nav>-->
             <br>
-<!--            <a sec:authorize="hasRole('ADMIN')" class="active" href="/api/user/admin/noticeModify">글등록(관리자만보이게 코딩)</a>-->
-            <a class="active" href="/api/user/admin/insert">글등록(TODO 관리자 페이지로 이동)</a>
+            <a sec:authorize="hasRole('ADMIN')" class="active" href="/api/admin/notice/manage">글등록</a>
+
+
         </div>
     </body>
 </html>

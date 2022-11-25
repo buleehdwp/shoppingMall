@@ -20,15 +20,18 @@ public class UserController {
 
     private UserService userService;
 
-
-    @PostMapping("/user/submit/signUp")
-    public ResponseEntity<ApiResponseMessage> signUpSubmit(@RequestBody UserDto userDto) throws Exception {
-        return userService.save(userDto);
-    }
-
+    // 로그아웃
     @GetMapping("/user/logout")
     public void logoutSubmit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
         response.sendRedirect("/");
     }
+
+    // 회원가입
+    @PostMapping("/send/user/signUp")
+    public ResponseEntity<ApiResponseMessage> signUpSubmit(@RequestBody UserDto userDto) throws Exception {
+        return userService.save(userDto);
+    }
+
+
 }
