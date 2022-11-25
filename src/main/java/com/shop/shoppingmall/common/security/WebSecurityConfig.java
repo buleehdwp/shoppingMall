@@ -27,11 +27,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+         /**
+          * 주소의 1번째 자리는 api 로 통일
+          * 주소의 2번째 자리는 user, view, 두가지로 분류
+          * (기본) api/user/* --> 기본적으로 로그인이 필요함(내 예약조회 등)
+          * (기본) api/view/* --> 자유롭게 이용 가능(공지사항, 예약하기 등)
+          * (중요) api/user/admin/* --> 로그인한 아이디의 auth가 ROLE_ADMIN이어야 함(db에서 따로 설정)(관리자 등)
+          * */
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/view/*/*", "/api/user/submit/*").permitAll()
-                .antMatchers("/*/*/admin/*").hasRole("ADMIN") //해당 요청은 admin 권한 필요
-                .antMatchers("/api/user/*/*").authenticated() //해당 요청은 로그인 인증 필요
+                .antMatchers("/api/user/admin/*").hasRole("ADMIN")
+                .antMatchers("/api/user/*/*").authenticated()
                 .anyRequest().permitAll() //나머지 요청은 모두 허용
                 .and()
                     .formLogin() //로그인 설정

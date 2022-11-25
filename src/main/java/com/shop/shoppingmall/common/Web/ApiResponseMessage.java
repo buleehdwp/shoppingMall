@@ -1,4 +1,4 @@
-package com.shop.shoppingmall.common.Web;
+package com.shop.shoppingmall.common.web;
 
 
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;

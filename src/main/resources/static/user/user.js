@@ -12,7 +12,7 @@ $(function () {
 
     // 회원가입 데이터 제출
     $(".submitBtn").on("click",function(e){
-        ajax_post("/api/user/submit/signUp", getJson($("#insertDiv")), "/api/view/user/login");
+        ajax_post("/api/user/submit/signUp", getJson($("#insertDiv")), "/api/login");
     })
 
 })

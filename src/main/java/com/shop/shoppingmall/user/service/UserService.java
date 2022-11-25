@@ -1,12 +1,10 @@
 package com.shop.shoppingmall.user.service;
 
-import com.nimbusds.openid.connect.sdk.claims.UserInfo;
-import com.shop.shoppingmall.common.Web.ApiResponseMessage;
+import com.shop.shoppingmall.common.web.ApiResponseMessage;
 import com.shop.shoppingmall.user.dto.UserDto;
 import com.shop.shoppingmall.user.entity.UserEntity;
 import com.shop.shoppingmall.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.loader.entity.NaturalIdEntityJoinWalker;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;

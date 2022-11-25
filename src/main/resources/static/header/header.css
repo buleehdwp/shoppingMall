@@ -8,7 +8,13 @@ a.navbar-brand img {
         right: 4%
     }
 
-    .home_logo ul li {
+    .home_logo ul li:first-child:nth-last-child(6),
+    .home_logo ul li:first-child:nth-last-child(6) ~ li {
         padding-left: 5rem;
+    }
+
+    .home_logo ul li:first-child:nth-last-child(7),
+    .home_logo ul li:first-child:nth-last-child(7) ~ li {
+        padding-left: 3rem;
     }
 }

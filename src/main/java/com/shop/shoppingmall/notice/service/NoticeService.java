@@ -1,6 +1,6 @@
 package com.shop.shoppingmall.notice.service;
 
-import com.shop.shoppingmall.common.Web.ApiResponseMessage;
+import com.shop.shoppingmall.common.web.ApiResponseMessage;
 import com.shop.shoppingmall.common.util.Utils;
 import com.shop.shoppingmall.notice.Repository.NoticeRepository;
 import com.shop.shoppingmall.notice.entity.NoticeEntity;
@@ -10,8 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service("Notice")
 public class NoticeService {

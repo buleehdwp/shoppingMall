@@ -1,6 +1,6 @@
 package com.shop.shoppingmall.user.controller;
 
-import com.shop.shoppingmall.common.Web.ApiResponseMessage;
+import com.shop.shoppingmall.common.web.ApiResponseMessage;
 import com.shop.shoppingmall.user.dto.UserDto;
 import com.shop.shoppingmall.user.service.UserService;
 import lombok.AllArgsConstructor;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api")
@@ -26,8 +27,8 @@ public class UserController {
     }
 
     @GetMapping("/user/logout")
-    public String logoutSubmit(HttpServletRequest request, HttpServletResponse response) {
+    public void logoutSubmit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
-        return "redirect:/";
+        response.sendRedirect("/");
     }
 }

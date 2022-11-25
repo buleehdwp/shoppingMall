@@ -1,11 +1,9 @@
 package com.shop.shoppingmall.notice.controller;
 
-import com.shop.shoppingmall.common.Web.ApiResponseMessage;
+import com.shop.shoppingmall.common.web.ApiResponseMessage;
 import com.shop.shoppingmall.notice.entity.NoticeEntity;
 import com.shop.shoppingmall.notice.service.NoticeService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;

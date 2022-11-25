@@ -23,8 +23,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("/page/main"); // /에 해당하는 요청은 index로 보내버림
+        registry.addViewController("/").setViewName("page/main"); // /에 해당하는 요청은 index로 보내버림
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE); // 우선순위 제일 높게 설정
+
         //{권한없는 페이지 접근}
         registry.addViewController("/access-denied").setViewName("page/user/denied");//{유저_로그인}
 
@@ -39,6 +40,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/api/view/notice/listPage").setViewName("page/notice/notice_view");//{공지사항_리스트}
         registry.addViewController("/api/view/notice/detailPage").setViewName("page/notice/notice_detail");//{공지사항_상세보기}
         registry.addViewController("/api/user/admin/insert").setViewName("page/notice/notice_insert");//{공지사항_수정하기}
+
+        //{오시는길}
+
+        //{예약하기}
+        registry.addViewController("/api/view/reservation/listPage").setViewName("page/reservation/reservation_view");//{예약하기_리스트}
+        //{예약조회}
     }
 
     // 정적 자원 핸들

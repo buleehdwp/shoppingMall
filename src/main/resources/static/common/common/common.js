@@ -67,6 +67,7 @@ function ajax_post(url, data, url2) {
             }
         },
         error: function (res) {
+            debugger
             if(res.status === 400){
                 alert(res.responseJSON.message)
             }

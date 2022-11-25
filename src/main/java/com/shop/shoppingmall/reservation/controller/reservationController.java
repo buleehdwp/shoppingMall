@@ -9,10 +9,5 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/api")
 public class reservationController {
 
-    @GetMapping("/user/reservation/list")
-    public ModelAndView getReservation() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("page/reservation/reservation_view");
-        return mav;
-    }
+
 }
