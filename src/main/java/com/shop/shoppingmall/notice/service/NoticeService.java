@@ -2,11 +2,14 @@ package com.shop.shoppingmall.notice.service;
 
 import com.shop.shoppingmall.common.web.ApiResponseMessage;
 import com.shop.shoppingmall.common.util.Utils;
+import com.shop.shoppingmall.common.web.PageDto;
 import com.shop.shoppingmall.notice.Repository.NoticeRepository;
 import com.shop.shoppingmall.notice.entity.NoticeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,8 +20,18 @@ public class NoticeService {
     private NoticeRepository noticeRepository;
 
     //전체보기
-    public ResponseEntity<ApiResponseMessage> findAll(String keyword, Pageable pageable) {
+    public ResponseEntity<ApiResponseMessage> findAll(PageDto dto, Pageable pageable) {
+        String keyword = dto.getKeyword();
+        String pNo = dto.getPageNo();
+        int pageNo = ("0".equals(pNo)) ? Integer.parseInt(pNo) : Integer.parseInt(pNo) - 1;
+        pageable = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC, "updateDate"));
+
         Page<NoticeEntity> entities = noticeRepository.findByDelYnContainingAndTitleContaining("N", keyword, pageable);
+
+        PageDto a = new PageDto();
+        a.getPageInfo(entities, pageNo);
+
+
         ApiResponseMessage message = new ApiResponseMessage(entities, "Ok", "");
         return new ResponseEntity<>(message, HttpStatus.OK);
     }

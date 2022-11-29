@@ -1,20 +1,20 @@
-#???? ??
+#프로파일 설정
 spring:
   profiles:
-    active: dev #???  yml? ??? ????? ????
+    active: dev #개발
 
 #dev
 ---
 spring:
-  #db ??
+  #db 세팅
   datasource:
     url: jdbc:oracle:thin:@localhost:1521:XE
     driver-class-name: oracle.jdbc.OracleDriver
     username: BLUE
     password: 1234
-  #????
+  #스프링 시큐리티
   security:
-    user: #?? ?? ?? ? ?? ?? ??
+    user: #스프링 시큐리티 기본 로그인 계정정보
       name: dev
       password: 1234
   config:
@@ -29,8 +29,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        
-#?? ??? ???? ??
+
+#로깅설정
 logging:
   level:
     org:
@@ -39,15 +39,15 @@ logging:
           descriptor:
             sql: trace
 
-#??
+#서버
 server:
-  port: 80 #????
+  port: 80
   servlet:
-    context-path: / #?????? ???
+    context-path: /
     encoding:
-      charset: UTF-8 #http ??? ?? ?? ??
-      enabled: true #http ??? ?? ?? ??
-      force: true #http ??? ?? ?? ??
+      charset: UTF-8
+      enabled: true
+      force: true
 
 
 ---

@@ -1,33 +1,90 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/common/layouts/layout.html}">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="/notice/notice.css"/>
-        <script src="/notice/notice_detail.js"></script>
-    </head>
-    <body>
-        <div layout:fragment="content">
-            <div sec:authorize="hasAnyRole('USER','ANONYMOUS')" id="detailDiv">
-                <table class="table detailTable">
+<head>
+    <link rel="stylesheet" href="/notice/notice.css"/>
+    <script>
+        $(function () {
+            //init
+            init();
 
-                </table>
-                <div class="col-lg-12 col-sm-12 text-lg-end text-center">
-                    <button type="button" class="btn btn-info backList">목록</button>
-                </div>
+            function init() {
+                getNotice(getQueryString().title)
+            }
+
+            function getNotice(keyword) {
+                $.ajax({
+                    url: "/api/view/notice/getDetail",
+                    type: "post",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        title: keyword
+                    }),
+                    success: function (res) {
+                        responseDataSet(res.data, $(".detailDiv"));
+                    },
+                    error: function (res) {
+                        if (res.status === 400) {
+                            alert(res.responseJSON.message)
+                        }
+                    }
+                })
+            }
+
+            $(".manage").on("click", function (e) {
+                $(".modify").show();
+                $(".delete").show();
+                unsetReadOnly($(".detailDiv .table"))
+            })
+
+            //modify
+            $(".modify").on("click", function () {
+                if (confirm("정말 수정하시겠습니까?")) {
+                    ajax_post("/api/admin/submit?type=U", getJson($(".detailDiv")), "/api/view/notice/list");
+                }
+            })
+
+            //delete
+            $(".delete").on("click", function () {
+                if (confirm("정말 삭제하시겠습니까?")) {
+                    ajax_post("/api/admin/submit?type=D", getJson($(".detailDiv")), "/api/view/notice/list");
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="detailDiv">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>제목</th>
+                    <td colspan="3"><input type="text" name="title" readonly></td>
+                </tr>
+                <tr>
+                    <th>작성자</th>
+                    <td><input type="text" name="createBy" readonly></td>
+                    <th>작성일</th>
+                    <td><input type="text" name="createDate" readonly></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><textarea class="form-control notice_content" name="content" readonly></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div sec:authorize="hasRole('ADMIN')">
+                <input type="text" name="uuid" hidden>
+                <input type="text" name="delYn" hidden>
             </div>
-
-            <div sec:authorize="hasRole('ADMIN')" id="modifyDiv">
-
-                <table class="table modifyTable" id="modifyTable">
-                    <input type="hidden" name="uuid">
-                    <input type="hidden" name="delYn">
-                </table>
-                <div class="col-lg-12 col-sm-12 text-lg-end text-center">
-                    <button type="button" class="btn btn-primary modify">수정하기</button>
-                    <button type="button" class="btn btn-danger delete">삭제하기</button>
-                    <button type="button" class="btn btn-warning cancel">뒤로가기</button>
-                </div>
+            <div class="col-lg-12 col-sm-12 text-lg-end text-center">
+                <button type="button" class="btn btn-info backList">목록</button>
+                <button sec:authorize="hasRole('ADMIN')" type="button" class="btn btn-success manage">관리</button>
+                <button sec:authorize="hasRole('ADMIN')" type="button" class="btn btn-primary modify">수정</button>
+                <button sec:authorize="hasRole('ADMIN')" type="button" class="btn btn-danger delete">삭제</button>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

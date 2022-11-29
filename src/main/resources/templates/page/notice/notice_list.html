@@ -1,50 +1,93 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/common/layouts/layout.html}">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="/notice/notice.css"/>
-        <script src="/notice/notice_view.js"></script>
-        <script>
-            console.log('<sec:authorize="principal">')
-        </script>
-    </head>
-    <body>
-        <div layout:fragment="content">
-            <div class="input-group">
-                <input type="search" id="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"/>
-                <button type="button" class="btn btn-outline-primary search">검색하기</button>
-            </div>
+<head>
+    <link rel="stylesheet" href="/notice/notice.css"/>
+    <script>
+        $(function () {
+            //init
+            init();
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">제목</th>
-                        <th scope="col">작성자</th>
-                        <th scope="col">작성일</th>
-                    </tr>
-                </thead>
-            </table>
+            function init() {
+                noticeSearch("/api/view/notice/search");
+            }
 
-            <!--            <nav aria-label="Page navigation example">-->
-            <!--                <ul class="pagination">-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="-">Previous</p></li>-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="0">1</p></li>-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="1">2</p></li>-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="2">3</p></li>-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="3">4</p></li>-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="4">5</p></li>-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="5">6</p></li>-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="6">7</p></li>-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="7">8</p></li>-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="8">9</p></li>-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="9">10</p></li>-->
-            <!--                    <li class="page-item"><p class="page-link" data-pageNum="+">Next</p></li>-->
-            <!--                </ul>-->
-            <!--            </nav>-->
-            <br>
-            <a sec:authorize="hasRole('ADMIN')" class="active" href="/api/admin/notice/manage">글등록</a>
+            //search.keyword
+            $(".search").on("click", function () {
+                noticeSearch("/api/view/notice/search");
+            })
 
+            $(".page-link").on("click", function (e) {
+                noticeSearch("/api/view/notice/search", e.target.innerHTML);
+            })
 
+            function noticeSearch(url, no) {
+                let pageNo = (no === undefined) ? "0" : no
+                $.ajax({
+                    url: url,
+                    type: "post",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        "keyword": $("#keyword").val(),
+                        "pageNo" : pageNo
+                    }),
+                    async: false,
+                    success: function (res) {
+                        $(".table tbody").empty();
+                        let data = res.data;
+                        let html = "<tbody>";
+                        $.each(data.content, function (idx, content) {
+                            // html += `<tr><td class="title">${content.title}</td><td class="createBy">${content.createBy}</td><td class="updateDate">${content.updateDate.substring(0, 10)}</td></tr>`;
+                            html += `<tr><td class="title">${content.title}</td><td class="createBy">${content.createBy}</td><td class="updateDate">${content.updateDate}</td></tr>`;
+                        })
+                        html += "</tbody>";
+                        $(".table").append(html);
+                    },
+                    error: function (res) {
+                    }
+                })
+            }
+
+            //search.detail
+            $(".table .title").on("click", function (e) {
+                let tag = e.target;
+                if (tag.className === "title") {
+                    location.href = "/api/view/notice/detail?title=" + enCrypto(tag.innerHTML);
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="input-group">
+            <input type="search" id="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"/>
+            <button type="button" class="btn btn-outline-primary search">검색하기</button>
         </div>
-    </body>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">작성일</th>
+            </tr>
+            </thead>
+        </table>
+
+        <nav>
+            <ul class="pagination">
+                <!--<li class="page-item"><p class="page-link">이전</p></li>
+                <li class="page-item"><p class="page-link">1</p></li>
+                <li class="page-item"><p class="page-link">2</p></li>
+                <li class="page-item"><p class="page-link">3</p></li>
+                <li class="page-item"><p class="page-link">4</p></li>
+                <li class="page-item"><p class="page-link">5</p></li>
+                <li class="page-item"><p class="page-link">다음</p></li>-->
+            </ul>
+            <div sec:authorize="hasRole('ADMIN')" class="col-lg-12 col-sm-12 text-lg-end text-center">
+                <a class="btn btn-success" href="/api/admin/notice/insert">글등록</a>
+            </div>
+        </nav>
+    </div>
+</body>
 </html>

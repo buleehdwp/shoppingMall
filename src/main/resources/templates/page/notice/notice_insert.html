@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/common/layouts/layout.html}">
+<head>
+    <link rel="stylesheet" href="/notice/notice.css"/>
+    <script src="/notice/notice_detail.js"></script>
+    <script>
+        $(function () {
+            //insert
+            $(".insert").on("click", function () {
+                if ($("#createBy").val() === "") $("#createBy").val("관리자");
+                ajax_post("/api/admin/submit?type=I", getJson($("#insertDiv")), "/api/view/notice/list");
+            })
+        })
+    </script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div id="insertDiv">
+            <div class="mb-3">
+                <span>제목</span>
+                <input type="text" class="form-control notice_title" id="title" name="title" autofocus>
+            </div>
+            <div class="mb-3">
+                작성자
+                <input type="text" class="form-control notice_createBy" id="createBy" name="createBy" placeholder="미입력 시 '관리자' 로 입력됩니다.">
+            </div>
+            <div class="mb-3">
+                내용 <textarea class="form-control notice_content" id="content" name="content" rows="3"></textarea>
+            </div>
+            <div class="col-lg-12 col-sm-12 text-lg-end text-center">
+                <button type="button" class="btn btn-primary insert">작성하기</button>
+                <button type="button" class="btn btn-warning cancel">뒤로가기</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

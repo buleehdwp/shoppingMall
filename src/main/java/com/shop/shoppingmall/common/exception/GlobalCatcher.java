@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalCatcher {
 
-
-
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED) // requestMapping method 불일치 에러
     @ExceptionHandler(Exception.class)
     public String cather(Exception e, Model model) {

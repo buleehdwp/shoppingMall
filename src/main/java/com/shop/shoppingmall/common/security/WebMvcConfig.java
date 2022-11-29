@@ -57,7 +57,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //{공지사항}
         registry.addViewController("/api/view/notice/list").setViewName("page/notice/notice_list");//{공지사항_리스트}
         registry.addViewController("/api/view/notice/detail").setViewName("page/notice/notice_detail");//{공지사항_상세보기}
-        registry.addViewController("/api/admin/notice/manage").setViewName("page/notice/notice_manage");//{공지사항_수정하기}
+        registry.addViewController("/api/admin/notice/insert").setViewName("page/notice/notice_insert");//{공지사항_수정하기}
 
 
 

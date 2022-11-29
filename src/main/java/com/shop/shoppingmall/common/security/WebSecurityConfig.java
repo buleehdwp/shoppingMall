@@ -1,5 +1,6 @@
 package com.shop.shoppingmall.common.security;
 
+import com.shop.shoppingmall.common.exception.AjaxAuthenticationEntryPoint;
 import com.shop.shoppingmall.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -45,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/") // 로그아웃 시 이동할 페이지
                 .invalidateHttpSession(true) // 로그아웃시 세션소멸
                 .and()
-                .exceptionHandling().accessDeniedPage("/api/view/access-denied");
+                .exceptionHandling().authenticationEntryPoint(new AjaxAuthenticationEntryPoint("/api/view/access-denied"));
     }
 
     @Override
