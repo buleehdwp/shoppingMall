@@ -21,18 +21,11 @@ public class NoticeService {
 
     //전체보기
     public ResponseEntity<ApiResponseMessage> findAll(PageDto dto, Pageable pageable) {
-        String keyword = dto.getKeyword();
-        String pNo = dto.getPageNo();
-        int pageNo = ("0".equals(pNo)) ? Integer.parseInt(pNo) : Integer.parseInt(pNo) - 1;
-        pageable = PageRequest.of(pageNo, 5, Sort.by(Sort.Direction.DESC, "updateDate"));
+        pageable = new PageDto().getPageable(pageable, dto);
+        Page<NoticeEntity> list = noticeRepository.findByDelYnContainingAndTitleContaining("N", dto.getKeyword(), pageable);
 
-        Page<NoticeEntity> entities = noticeRepository.findByDelYnContainingAndTitleContaining("N", keyword, pageable);
-
-        PageDto a = new PageDto();
-        a.getPageInfo(entities, pageNo);
-
-
-        ApiResponseMessage message = new ApiResponseMessage(entities, "Ok", "");
+        PageDto.PageVo responseData = new PageDto().getPageInfo(list, dto);
+        ApiResponseMessage message = new ApiResponseMessage(responseData, "Ok", "");
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

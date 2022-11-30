@@ -16,31 +16,40 @@
                 noticeSearch("/api/view/notice/search");
             })
 
-            $(".page-link").on("click", function (e) {
-                noticeSearch("/api/view/notice/search", e.target.innerHTML);
+            $(".pagination").on("click", function (e) {
+                if ($(e.target).hasClass("page-has")) {
+                    if (!JSON.parse(e.target.dataset.has)) {
+                        alert(e.target.dataset.msg);
+                        return false;
+                    } else {
+                        noticeSearch("/api/view/notice/search", e.target.dataset.index);
+                    }
+                } else if($(e.target).hasClass("page-link")) {
+                    noticeSearch("/api/view/notice/search", e.target.innerHTML);
+                }
             })
 
             function noticeSearch(url, no) {
-                let pageNo = (no === undefined) ? "0" : no
                 $.ajax({
                     url: url,
                     type: "post",
                     contentType: "application/json",
                     data: JSON.stringify({
                         "keyword": $("#keyword").val(),
-                        "pageNo" : pageNo
+                        "pageNo": (no === undefined) ? 1 : no,
                     }),
                     async: false,
                     success: function (res) {
                         $(".table tbody").empty();
-                        let data = res.data;
-                        let html = "<tbody>";
-                        $.each(data.content, function (idx, content) {
-                            // html += `<tr><td class="title">${content.title}</td><td class="createBy">${content.createBy}</td><td class="updateDate">${content.updateDate.substring(0, 10)}</td></tr>`;
+                        let data = res.data.data;
+                        let html = "";
+                        $.each(data, function (idx, content) {
                             html += `<tr><td class="title">${content.title}</td><td class="createBy">${content.createBy}</td><td class="updateDate">${content.updateDate}</td></tr>`;
                         })
-                        html += "</tbody>";
-                        $(".table").append(html);
+                        $(".table tbody").append(html);
+
+                        $(".pagination").empty();
+                        $(".pagination").append(page(res.data.pageInfo))
                     },
                     error: function (res) {
                     }
@@ -72,17 +81,13 @@
                 <th scope="col">작성일</th>
             </tr>
             </thead>
+            <tbody>
+
+            </tbody>
         </table>
 
         <nav>
             <ul class="pagination">
-                <!--<li class="page-item"><p class="page-link">이전</p></li>
-                <li class="page-item"><p class="page-link">1</p></li>
-                <li class="page-item"><p class="page-link">2</p></li>
-                <li class="page-item"><p class="page-link">3</p></li>
-                <li class="page-item"><p class="page-link">4</p></li>
-                <li class="page-item"><p class="page-link">5</p></li>
-                <li class="page-item"><p class="page-link">다음</p></li>-->
             </ul>
             <div sec:authorize="hasRole('ADMIN')" class="col-lg-12 col-sm-12 text-lg-end text-center">
                 <a class="btn btn-success" href="/api/admin/notice/insert">글등록</a>

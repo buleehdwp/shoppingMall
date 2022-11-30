@@ -19,7 +19,7 @@ public class NoticeController {
     private NoticeService noticeService;
 
     @PostMapping("/view/notice/search")
-    public ResponseEntity<ApiResponseMessage> getSearch(@RequestBody  PageDto dto, Pageable pageable) {
+    public ResponseEntity<ApiResponseMessage> getSearch(@RequestBody PageDto dto, Pageable pageable) {
         return noticeService.findAll(dto, pageable);
     }
 

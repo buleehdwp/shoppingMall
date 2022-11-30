@@ -13,12 +13,27 @@ $(function () {
     })
 })
 
-//암호화
+//Pagination
+function page(info){
+    let lis = `<li class="page-item"><p class="page-link page-has" data-has=${info.hasPrev} data-index=${info.prevIndex} data-msg="이전페이지가 없습니다.">이전</p></li>`
+    for(let i = info.startNumber; i <= info.endNumber; i++){
+        if(info.pNo === i){
+            lis += `<li class="page-item"><p class="page-link number-active">${i}</p></li>`
+        }else{
+            lis += `<li class="page-item"><p class="page-link">${i}</p></li>`
+        }
+    }
+    lis += `<li class="page-item"><p class="page-link page-has" data-has=${info.hasNext} data-index=${info.nextIndex} data-msg="다음페이지가 없습니다.">다음</p></li>`
+    return lis;
+}
+
+
+//encryption
 function enCrypto(str) {
     return CryptoJS.AES.encrypt(JSON.stringify(str), 'Gorilla').toString();
 }
 
-//복호화
+//decryption
 function deCrypto(str) {
     return JSON.parse(CryptoJS.AES.decrypt(str, 'Gorilla').toString(CryptoJS.enc.Utf8));
 }

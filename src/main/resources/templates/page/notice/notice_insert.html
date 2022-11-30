@@ -2,15 +2,25 @@
 <html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/common/layouts/layout.html}">
 <head>
     <link rel="stylesheet" href="/notice/notice.css"/>
-    <script src="/notice/notice_detail.js"></script>
     <script>
+        let a = 183;
+
         $(function () {
             //insert
             $(".insert").on("click", function () {
                 if ($("#createBy").val() === "") $("#createBy").val("관리자");
                 ajax_post("/api/admin/submit?type=I", getJson($("#insertDiv")), "/api/view/notice/list");
             })
+
+            // setInterval(autoInsert, 1500)
         })
+
+        function autoInsert() {
+            $("#title").val(a);
+            $("#content").val(a);
+            $(".insert").click();
+            a++;
+        }
     </script>
 </head>
 <body>

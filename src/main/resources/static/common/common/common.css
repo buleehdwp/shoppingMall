@@ -28,3 +28,24 @@ p.page-link{
     margin-top: 300px;
 }
 
+/*페이지*/
+.pagination li{
+    width: 5.5%;
+    text-align: center;
+}
+
+.pagination p{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    width: 100%;
+}
+.number-active:hover{
+    background-color: lightgray !important;
+}
+.number-active{
+    background-color: lightgray !important;
+}
+
+
