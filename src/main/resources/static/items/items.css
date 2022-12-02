@@ -1,75 +1,78 @@
 /*탭 박스 공통*/
-.nav-tabs{
+.nav-tabs {
     margin-top: 5%;
 }
 
-.tab-content{
+.tab-content {
     height: 100%;
     margin-top: 5%;
 }
 
-.tab-pane{
+.tab-pane {
     height: 100%;
 }
 
 /*오시는 길*/
-.text-address{
+.text-address {
     text-align: center;
     margin-bottom: 2.5%;
 }
+
 .kMap {
-    margin : 0 auto;
+    margin: 0 auto;
     width: 80%;
     height: 100%;
 }
 
 
 /*배치도*/
-.settingImg{
+.settingImg {
     object-fit: cover;
     width: 100%;
 }
 
 
-
-
-
 /*펜션&캠핑*/
-.modal-icon{
+.modal-icon {
     display: block;
     margin: 0 auto;
     height: 50px;
 }
 
-.pension:hover{
+.pension:hover {
     background-color: lightgray;
     cursor: pointer;
 }
 
 
-.camp:hover{
+.camp:hover {
     background-color: lightgray;
     cursor: pointer;
 }
 
-.pension{
+.pension {
     width: 30%;
     height: 100%;
     float: left;
     margin: 10% 0 0 15%;
 }
 
-.camp{
+.camp {
     width: 30%;
     height: 100%;
     float: right;
     margin: 10% 15% 0 0;
 }
 
-.pension, .camp> .modal-body{
+.pension > .modal-header, .camp > .modal-header {
+    border-bottom: none;
+}
+
+.pension > .modal-body, .camp > .modal-body {
     text-align: center;
 }
 
-.pensionText, .campText{
+.pensionText, .campText {
     font-size: 2rem;
+    user-select: none;
 }

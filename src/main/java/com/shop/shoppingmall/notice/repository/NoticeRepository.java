@@ -1,4 +1,4 @@
-package com.shop.shoppingmall.notice.Repository;
+package com.shop.shoppingmall.notice.repository;
 
 import com.shop.shoppingmall.notice.entity.NoticeEntity;
 import org.springframework.data.domain.Page;

@@ -13,14 +13,14 @@
 
             function getNotice(keyword) {
                 $.ajax({
-                    url: "/api/view/notice/getDetail",
-                    type: "post",
-                    contentType: "application/json",
+                    url: `/api/view/notice/getDetail`,
+                    type: `post`,
+                    contentType: `application/json`,
                     data: JSON.stringify({
                         title: keyword
                     }),
                     success: function (res) {
-                        responseDataSet(res.data, $(".detailDiv"));
+                        responseDataSet(res.data, $(`.detailDiv`));
                     },
                     error: function (res) {
                         if (res.status === 400) {
@@ -30,23 +30,23 @@
                 })
             }
 
-            $(".manage").on("click", function (e) {
-                $(".modify").show();
-                $(".delete").show();
-                unsetReadOnly($(".detailDiv .table"))
+            $(`.manage`).on(`click`, function (e) {
+                $(`.modify`).show();
+                $(`.delete`).show();
+                unsetReadOnly($(`.detailDiv .table`))
             })
 
             //modify
-            $(".modify").on("click", function () {
-                if (confirm("정말 수정하시겠습니까?")) {
-                    ajax_post("/api/admin/submit?type=U", getJson($(".detailDiv")), "/api/view/notice/list");
+            $(`.modify`).on(`click`, function () {
+                if (confirm(`정말 수정하시겠습니까?`)) {
+                    ajax_post(`/api/admin/submit?type=U`, getJson($(`.detailDiv`)), `/api/view/notice/list`);
                 }
             })
 
             //delete
-            $(".delete").on("click", function () {
-                if (confirm("정말 삭제하시겠습니까?")) {
-                    ajax_post("/api/admin/submit?type=D", getJson($(".detailDiv")), "/api/view/notice/list");
+            $(`.delete`).on(`click`, function () {
+                if (confirm(`정말 삭제하시겠습니까?`)) {
+                    ajax_post(`/api/admin/submit?type=D`, getJson($(`.detailDiv`)), `/api/view/notice/list`);
                 }
             })
         })

@@ -7,18 +7,18 @@
 
         $(function () {
             //insert
-            $(".insert").on("click", function () {
-                if ($("#createBy").val() === "") $("#createBy").val("관리자");
-                ajax_post("/api/admin/submit?type=I", getJson($("#insertDiv")), "/api/view/notice/list");
+            $(`.insert`).on(`click`, function () {
+                if ($(`#createBy`).val() === ``) $(`#createBy`).val(`관리자`);
+                ajax_post(`/api/admin/submit?type=I`, getJson($(`#insertDiv`)), `/api/view/notice/list`);
             })
 
             // setInterval(autoInsert, 1500)
         })
 
         function autoInsert() {
-            $("#title").val(a);
-            $("#content").val(a);
-            $(".insert").click();
+            $(`#title`).val(a);
+            $(`#content`).val(a);
+            $(`.insert`).click();
             a++;
         }
     </script>

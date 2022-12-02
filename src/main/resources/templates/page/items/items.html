@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="/items/items.css">
     <script>
         $(function () {
-            const height = $(".container.container-content").innerHeight()
+            const height = $(`.container.container-content`).innerHeight()
             /*======오시는길======*/
             /*기본*/
-            let mapContainer = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+            let mapContainer = document.getElementById(`map`); //지도를 담을 영역의 DOM 레퍼런스
             let mapOption = { //지도를 생성할 때 필요한 기본 옵션
                 center: new kakao.maps.LatLng(37.8868, 127.542), //지도의 중심좌표.
                 level: 3 //지도의 레벨(확대, 축소 정도)
@@ -38,13 +38,13 @@
             map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
             /*======배치도======*/
-            $(".nav-link").on("click", function (e) {
-                if ($(e.target).hasClass("setting")) {
-                    $(".container.container-content").css("height", "100%")
-                    $(".footer").css("margin-top", "3%")
+            $(`.nav-link`).on(`click`, function (e) {
+                if ($(e.target).hasClass(`setting`)) {
+                    $(`.container.container-content`).css(`height`, `100%`)
+                    $(`.footer`).css(`margin-top`,`3%`)
                 } else {
-                    $(".container.container-content").css("height", height + "px");
-                    $(".footer").css("margin-top", "10%")
+                    $(`.container.container-content`).css(`height`, `${height}px`);
+                    $(`.footer`).css(`margin-top`, `10%`)
                 }
             })
         })
@@ -54,13 +54,13 @@
     <div layout:fragment="content">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link wellCome" id="nav-wellCome-tab" data-bs-toggle="tab" data-bs-target="#nav-wellCome" type="button" role="tab" aria-controls="nav-wellCome" aria-selected="false">오시는 길</button>
+                <button class="nav-link wellCome active" id="nav-wellCome-tab" data-bs-toggle="tab" data-bs-target="#nav-wellCome" type="button" role="tab" aria-controls="nav-wellCome" aria-selected="true">오시는 길</button>
                 <button class="nav-link setting" id="nav-setting-tab" data-bs-toggle="tab" data-bs-target="#nav-setting" type="button" role="tab" aria-controls="nav-setting" aria-selected="false">배치도</button>
-                <button class="nav-link choose active" id="nav-choose-tab" data-bs-toggle="tab" data-bs-target="#nav-choose" type="button" role="tab" aria-controls="nav-choose" aria-selected="true">펜션&캠핑</button>
+                <button class="nav-link choose" id="nav-choose-tab" data-bs-toggle="tab" data-bs-target="#nav-choose" type="button" role="tab" aria-controls="nav-choose" aria-selected="false">펜션&캠핑</button>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade" id="nav-wellCome" role="tabpanel" aria-labelledby="nav-wellCome-tab">
+            <div class="tab-pane fade show active" id="nav-wellCome" role="tabpanel" aria-labelledby="nav-wellCome-tab">
                 <p class="text-address">주소 : 경기도 가평군 북면 제령아랫말길 67-61</p>
                 <div class="kMap" id="map"></div>
             </div>
@@ -69,7 +69,7 @@
                 <img class="settingImg" src="/items/setting.jpg" alt="배치도">
             </div>
 
-            <div class="tab-pane fade show active" id="nav-choose" role="tabpanel" aria-labelledby="nav-choose-tab">
+            <div class="tab-pane fade" id="nav-choose" role="tabpanel" aria-labelledby="nav-choose-tab">
                 <div class="choose-div">
                     <div class="modal-content pension">
                         <div class="modal-header">

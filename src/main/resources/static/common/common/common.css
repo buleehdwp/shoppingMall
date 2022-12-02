@@ -1,4 +1,9 @@
+/*폰트*/
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Single+Day&display=swap');
+
 body {
+    font-family: 'Single Day', cursive;
+    font-size: 1.325rem;
     padding-bottom: 20px;
 }
 

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/map")
-public class mapController {
+public class MapController {
 
     @GetMapping("/view")
     public ModelAndView getLoadMap(){

@@ -1,5 +1,6 @@
 package com.shop.shoppingmall.notice.entity;
 
+import com.shop.shoppingmall.common.web.Uuid;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -10,14 +11,7 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "G_BOARD")
 @Data
-public class NoticeEntity {
-
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    @Column(name = "uuid", unique = true)
-    private String uuid;
-
+public class NoticeEntity extends Uuid {
     @Column(name = "title")
     private String title;
 
@@ -33,8 +27,6 @@ public class NoticeEntity {
     @Column(name = "created_date", updatable = false)
     private String createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-    @Column(name = "update_date", updatable = true)
+    @Column(name = "update_date")
     private String updateDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
-
 }

@@ -1,5 +1,6 @@
 package com.shop.shoppingmall.user.entity;
 
+import com.shop.shoppingmall.common.web.Uuid;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,13 +19,7 @@ import java.util.Set;
 @Entity
 @Table(name = "G_USER")
 @Data
-public class UserEntity implements UserDetails {
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    @Column(name = "uuid", unique = true)
-    private String uuid;
-
+public class UserEntity extends Uuid implements UserDetails {
     @Column(name = "email")
     private String email;
 
